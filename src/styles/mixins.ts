@@ -3,6 +3,9 @@ import typography from "@/styles/typography"
 import { StyleSheet } from "react-native"
 
 const mixins = StyleSheet.create({
+    scrollView: {
+        flexGrow: 1,
+    },
     label: {
         fontSize: 14,
         marginBottom: 8,

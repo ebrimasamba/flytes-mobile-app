@@ -19,7 +19,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const onSubmit = () => {
-    navigation.navigate("Home" as never);
+    navigation.navigate("Tab" as never);
   };
 
   return (
