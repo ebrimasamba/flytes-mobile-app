@@ -46,8 +46,8 @@ const Input = (props: InputProps) => {
   const hasValue = props.value && props.value.length > 0;
 
   const inputStyles = [
-    styles.input,
-    focused && styles.inputFocused,
+    mixins.input,
+    focused && mixins.inputFocused,
     props.error && styles.inputError,
     props.search && styles.inputSearch,
     props.style,
@@ -63,7 +63,6 @@ const Input = (props: InputProps) => {
     <View style={[styles.container, props.containerStyle]}>
       <View style={styles.inputWrapper}>
         {props.label && <H3 style={labelStyles}>{props.label}</H3>}
-
         <TextInput
           {...props}
           autoCapitalize="none"
@@ -73,7 +72,7 @@ const Input = (props: InputProps) => {
           onFocus={onFocus}
           onBlur={onBlur}
           style={inputStyles}
-          placeholder={focused ? props.placeholder : undefined}
+          placeholder={props.placeholder}
         />
       </View>
     </View>
@@ -88,13 +87,14 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   label: {
-    position: "absolute",
-    left: 12,
-    top: 8,
+    // position: "absolute",
+    // left: 12,
+    // top: 8,
     fontSize: 14,
     color: colors.textLight,
     fontWeight: "500",
     zIndex: 1,
+    marginBottom: 8,
     // backgroundColor: colors.white,
     paddingHorizontal: 4,
   },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: colors.gray,
     borderRadius: 12,
-    // borderWidth: 1,
+    borderWidth: 1,
     borderColor: colors.lightGray,
     paddingHorizontal: 16,
     paddingTop: 28,
@@ -117,20 +117,9 @@ const styles = StyleSheet.create({
     fontFamily: "Figtree Regular",
     fontWeight: "400",
     letterSpacing: -0.05,
-    // shadowColor: colors.black,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.05,
-    // shadowRadius: 2,
-    // elevation: 1,
   },
   inputFocused: {
     borderColor: colors.primary,
-    // shadowOpacity: 0.1,
-    // shadowRadius: 4,
-    // elevation: 2,
   },
   inputError: {
     borderColor: colors.danger,

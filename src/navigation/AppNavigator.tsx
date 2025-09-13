@@ -5,6 +5,7 @@ import colors from "@/styles/colors";
 
 import LoginScreen from "@/screens/LoginScreen";
 import LoadingScreen from "@/screens/LoadingScreen";
+import CreateAccountScreen from "@/screens/CreateAccountScreen";
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -15,6 +16,7 @@ const AppNavigator = () => {
         contentStyle: { backgroundColor: colors.white },
       }}
     >
+      <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Loading" component={LoadingScreen} />
     </Stack.Navigator>

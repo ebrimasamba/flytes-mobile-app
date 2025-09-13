@@ -10,6 +10,7 @@ import React, { PropsWithChildren } from "react";
 // Design system imports
 import { colors, mixins } from "@/styles";
 import { H2 } from "@/components/typography";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
   icon?: any;
@@ -28,6 +29,10 @@ const PrimaryButton = (props: PropsWithChildren<PrimaryButtonProps>) => {
         props.style,
       ]}
     >
+      <LinearGradient
+        colors={[colors.primary, colors.primaryDark]}
+        style={StyleSheet.absoluteFill}
+      />
       <View style={styles.buttonContent}>
         <H2
           style={[

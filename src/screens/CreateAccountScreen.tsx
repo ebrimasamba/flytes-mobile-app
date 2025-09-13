@@ -15,7 +15,7 @@ import Checkbox from "@/components/inputs/Checkbox";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import ScreenWrapper from "@/components/wrappers/ScreenWrapper";
 
-const LoginScreen = () => {
+const CreateAccountScreen = () => {
   const navigation = useNavigation();
 
   const onSubmit = () => {
@@ -34,11 +34,16 @@ const LoginScreen = () => {
 
           <View style={styles.formContainer}>
             <View style={styles.formTitleContainer}>
-              <H2 style={styles.formTitle}>Welcome back </H2>
+              <H2 style={styles.formTitle}>Create an account </H2>
               <P style={styles.formDescription}>
-                Enter your email and password to login
+                Enter your email and password to create an account
               </P>
             </View>
+            <Input
+              label="Name"
+              placeholder="Enter your name"
+              containerStyle={styles.inputContainer}
+            />
             <Input
               label="Email Address"
               placeholder="Enter your email"
@@ -60,14 +65,14 @@ const LoginScreen = () => {
         </View>
         <View>
           <PrimaryButton style={styles.loginButton} onPress={onSubmit}>
-            Sign in
+            Create account
           </PrimaryButton>
           <View style={styles.signupContainer}>
-            <P style={styles.signupText}>Don't have an account? </P>
+            <P style={styles.signupText}>Already have an account? </P>
             <TouchableOpacity
-              onPress={() => navigation.navigate("CreateAccount" as never)}
+              onPress={() => navigation.navigate("Login" as never)}
             >
-              <P style={styles.signupLink}>Sign up</P>
+              <P style={styles.signupLink}>Login</P>
             </TouchableOpacity>
           </View>
         </View>
@@ -94,4 +99,4 @@ const styles = StyleSheet.create({
   signupLink: mixins.signupLink,
 });
 
-export default LoginScreen;
+export default CreateAccountScreen;

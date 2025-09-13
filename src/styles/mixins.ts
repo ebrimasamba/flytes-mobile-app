@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native"
 const mixins = StyleSheet.create({
     label: {
         fontSize: 14,
-        // marginBottom: 8,
+        marginBottom: 8,
         letterSpacing: -0.1,
         fontWeight: "500",
         color: colors.text,
@@ -18,11 +18,10 @@ const mixins = StyleSheet.create({
     input: {
         paddingHorizontal: 10,
         paddingVertical: 14,
-        // borderRadius: 12,
-        borderBottomWidth: 1,
+        borderRadius: 8,
         height: 50,
-        // borderCurve: "continuous",
-        backgroundColor: colors.white,
+        borderCurve: "continuous",
+        backgroundColor: colors.gray,
         borderColor: colors.lightGray,
         ...typography.p,
         letterSpacing: -0.1,
@@ -35,7 +34,7 @@ const mixins = StyleSheet.create({
     inputFocused: {
         borderColor: colors.primary,
         backgroundColor: colors.white,
-
+        borderWidth: 1.5,
     },
     inputError: {
         borderColor: colors.danger,
@@ -49,20 +48,14 @@ const mixins = StyleSheet.create({
         backgroundColor: colors.primary,
         paddingVertical: 16,
         paddingHorizontal: 24,
-        borderRadius: 48,
+        borderRadius: 18,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
         width: "100%",
         height: 56,
-        // shadowColor: colors.primary,
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // shadowOpacity: 0.15,
-        // shadowRadius: 4,
-        // elevation: 3,
+        overflow: "hidden",
+
     },
     buttonMarginBottom: {
         marginBottom: 35,
@@ -76,15 +69,15 @@ const mixins = StyleSheet.create({
         fontSize: 22,
         marginBottom: 24,
     },
-    infoText: {
-        fontSize: 14,
-        lineHeight: 1.6 * 14,
-        opacity: 0.86,
+    checkbox: {
+        width: 20,
+        height: 20,
+        borderRadius: 5,
+        borderWidth: 1,
+        backgroundColor: colors.gray,
+        borderColor: colors.lightGray,
+        borderCurve: "continuous",
     },
-    // infoLink: {
-    //     color: colors.blue,
-    //     textDecorationLine: "underline",
-    // },
     moveApart: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -99,7 +92,70 @@ const mixins = StyleSheet.create({
         shadowOpacity: 0.03,
         shadowRadius: 3.84,
         elevation: 0.5,
-    }
+    },
+    // Screen Layout Styles
+    screenContainer: {
+        flex: 1,
+        justifyContent: "space-between",
+    },
+    logoContainer: {
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 35,
+    },
+    logo: {
+        width: 60,
+        height: 60,
+    },
+    logoText: {
+        fontSize: 24,
+        textAlign: "center",
+    },
+    formContainer: {},
+    formTitleContainer: {
+        marginBottom: 30,
+    },
+    screenFormTitle: {
+        fontSize: 28,
+        textAlign: "center",
+        marginBottom: 10,
+    },
+    screenFormDescription: {
+        textAlign: "center",
+    },
+    screenInputContainer: {
+        marginBottom: 30,
+    },
+    checkboxContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
+    checkboxText: {
+        fontSize: 14,
+        textAlign: "center",
+        color: colors.textLight,
+    },
+    primaryButton: {
+        marginTop: 30,
+    },
+    signupContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 1,
+        marginTop: 10,
+    },
+    signupText: {
+        fontSize: 14,
+        textAlign: "center",
+        color: colors.textLight,
+    },
+    signupLink: {
+        fontSize: 14,
+        textAlign: "center",
+        color: colors.primary,
+    },
 
 })
 
