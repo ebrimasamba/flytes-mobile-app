@@ -31,7 +31,20 @@
           "image": "./assets/splash-icon.png"
         }
       ],
-      "react-native-edge-to-edge"
+      "react-native-edge-to-edge",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo-google-fonts/figtree/400Regular/Figtree_400Regular.ttf",
+            "node_modules/@expo-google-fonts/figtree/500Medium/Figtree_500Medium.ttf",
+            "node_modules/@expo-google-fonts/figtree/600SemiBold/Figtree_600SemiBold.ttf",
+            "node_modules/@expo-google-fonts/figtree/700Bold/Figtree_700Bold.ttf",
+            "node_modules/@expo-google-fonts/figtree/800ExtraBold/Figtree_800ExtraBold.ttf",
+            "node_modules/@expo-google-fonts/figtree/900Black/Figtree_900Black.ttf"
+          ]
+        }
+      ]
     ]
   }
 }
