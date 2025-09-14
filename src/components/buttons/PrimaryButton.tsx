@@ -24,13 +24,19 @@ const PrimaryButton = (props: PropsWithChildren<PrimaryButtonProps>) => {
       style={[
         mixins.button,
         props.variant === "secondary" && {
-          backgroundColor: colors.gray,
+          backgroundColor: "transparent",
+          borderWidth: 1,
+          borderColor: colors.primary,
         },
         props.style,
       ]}
     >
       <LinearGradient
-        colors={[colors.primary, colors.primaryDark]}
+        colors={
+          props.variant === "secondary"
+            ? ["transparent", "transparent"]
+            : [colors.primary, colors.primaryDark]
+        }
         style={StyleSheet.absoluteFill}
       />
       <View style={styles.buttonContent}>

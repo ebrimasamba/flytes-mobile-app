@@ -11,6 +11,8 @@ const colors = {
     lightGray: "#D3D3D3",
     darkGray: "#A9A9A9",
     backgroundInput: "#F5F5F5",
+    success: "#008000",
+    warning: "#FFA500",
 
 };
 

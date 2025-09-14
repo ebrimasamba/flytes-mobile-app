@@ -8,7 +8,11 @@ import * as SplashScreen from "expo-splash-screen";
 
 import AppNavigator from "@/navigation/AppNavigator";
 
-Asset.loadAsync([...NavigationAssets, require("@/assets/images/logo.png")]);
+Asset.loadAsync([
+  ...NavigationAssets,
+  require("@/assets/images/logo.png"),
+  require("@/assets/images/background.png"),
+]);
 
 SplashScreen.preventAutoHideAsync();
 

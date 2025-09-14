@@ -1,37 +1,33 @@
-import { View, StyleSheet } from "react-native";
 import React from "react";
-import { LinearGradient } from "expo-linear-gradient";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import { colors, mixins } from "@/styles";
-
-import HomeHeader from "@/components/homescreen/HomeHeader";
-import ScreenWrapper from "@/components/wrappers/ScreenWrapper";
 import Container from "@/components/misc/Container";
+import HomeHeader from "@/components/homescreen/HomeHeader";
+import ServicesSection from "@/components/services-section/ServicesSection";
+import PopularDestinations from "@/components/popular-destinations/PopularDestinations";
 
 const HomeScreen = () => {
   return (
-    <LinearGradient
-      colors={[
-        colors.primaryLight + "90",
-        colors.white,
-        colors.white,
-        colors.white,
-      ]}
-      start={{ x: 0.5, y: 0 }}
-      end={{ x: 0.5, y: 1 }}
-      style={mixins.expand}
+    <ScrollView
+      style={{ flex: 1, backgroundColor: colors.white }}
+      contentContainerStyle={mixins.scrollView}
     >
-      <ScreenWrapper>
-        <Container style={styles.container}>
-          <HomeHeader />
-        </Container>
-      </ScreenWrapper>
-    </LinearGradient>
+      <HomeHeader />
+      <Container style={styles.container}>
+        <View style={styles.contentContainer}>
+          <PopularDestinations />
+        </View>
+      </Container>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  contentContainer: {
     flex: 1,
   },
 });
