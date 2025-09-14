@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 import { colors } from "@/styles";
 import { HEADER_BACKGROUND, PROFILE } from "@/constants/images";
+import { useAuthStore } from "@/store/authStore";
 
 import { H1, H2, H3, P } from "@/components/typography";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
@@ -14,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const HomeHeader = () => {
   const navigation = useNavigation();
+  const { user, logout } = useAuthStore();
   const [activeInput, setActiveInput] = useState<string | null>(null);
   const [tripType, setTripType] = useState<"one-way" | "round-trip">(
     "round-trip"
@@ -28,6 +30,24 @@ const HomeHeader = () => {
     setTripType(type);
   };
 
+  const handleProfilePress = () => {
+    Alert.alert("Profile", `Hello ${user?.name}!`, [
+      {
+        text: "View Profile",
+        onPress: () => navigation.navigate("Profile" as never),
+      },
+      { text: "Logout", onPress: handleLogout, style: "destructive" },
+      { text: "Cancel", style: "cancel" },
+    ]);
+  };
+
+  const handleLogout = () => {
+    Alert.alert("Logout", "Are you sure you want to logout?", [
+      { text: "Cancel", style: "cancel" },
+      { text: "Logout", onPress: logout, style: "destructive" },
+    ]);
+  };
+
   return (
     <ImageBackground source={HEADER_BACKGROUND} contentFit="cover">
       <SafeAreaView edges={["top"]}>
@@ -36,12 +56,18 @@ const HomeHeader = () => {
           <View style={styles.profileContainer}>
             <View style={styles.greetingContainer}>
               <View style={styles.greetingRow}>
-                <H3 style={styles.greeting}>Hello Ebrima,</H3>
+                <H3 style={styles.greeting}>Hello {user?.name || "User"},</H3>
               </View>
               <H1 style={styles.title}>Traveling today?</H1>
             </View>
-            <TouchableOpacity style={styles.profileButton}>
-              <Image source={PROFILE} style={styles.profileImage} />
+            <TouchableOpacity
+              style={styles.profileButton}
+              onPress={handleProfilePress}
+            >
+              <Image
+                source={user?.avatar || PROFILE}
+                style={styles.profileImage}
+              />
               {/* <View style={styles.notificationBadge}>
                   <Text style={styles.notificationText}>3</Text>
                 </View> */}

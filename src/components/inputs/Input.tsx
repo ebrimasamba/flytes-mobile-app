@@ -16,7 +16,7 @@ import { H3 } from "../typography";
 
 interface InputProps extends TextInputProps {
   label?: string;
-  error?: boolean;
+  error?: string | boolean;
   onFocused?: () => void;
   onBlurred?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   containerStyle?: object;
@@ -44,11 +44,12 @@ const Input = (props: InputProps) => {
 
   // Computed values
   const hasValue = props.value && props.value.length > 0;
+  const hasError = Boolean(props.error);
 
   const inputStyles = [
     mixins.input,
     focused && mixins.inputFocused,
-    props.error && styles.inputError,
+    hasError && styles.inputError,
     props.search && styles.inputSearch,
     props.style,
   ];
@@ -57,6 +58,7 @@ const Input = (props: InputProps) => {
     styles.label,
     focused && styles.labelFocused,
     hasValue && styles.labelWithValue,
+    hasError && styles.labelError,
   ];
 
   return (
@@ -74,6 +76,9 @@ const Input = (props: InputProps) => {
           style={inputStyles}
           placeholder={props.placeholder}
         />
+        {hasError && typeof props.error === "string" && (
+          <H3 style={styles.errorText}>{props.error}</H3>
+        )}
       </View>
     </View>
   );
@@ -126,6 +131,15 @@ const styles = StyleSheet.create({
   },
   inputSearch: {
     paddingLeft: 40,
+  },
+  labelError: {
+    color: colors.danger,
+  },
+  errorText: {
+    color: colors.danger,
+    fontSize: 12,
+    marginTop: 4,
+    marginLeft: 4,
   },
   search: {
     position: "absolute",

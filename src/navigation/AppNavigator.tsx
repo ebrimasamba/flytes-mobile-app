@@ -1,5 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useAuthStore } from "@/store/authStore";
 
 import colors from "@/styles/colors";
 
@@ -10,6 +11,12 @@ import CreateAccountScreen from "@/screens/CreateAccountScreen";
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
+  const { isAuthenticated, isLoading } = useAuthStore();
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -17,11 +24,14 @@ const AppNavigator = () => {
         contentStyle: { backgroundColor: colors.white },
       }}
     >
-      <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Loading" component={LoadingScreen} />
-
-      <Stack.Screen name="Tab" component={TabNavigator} />
+      {isAuthenticated ? (
+        <Stack.Screen name="Tab" component={TabNavigator} />
+      ) : (
+        <>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="CreateAccount" component={CreateAccountScreen} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

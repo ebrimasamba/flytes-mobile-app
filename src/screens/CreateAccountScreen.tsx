@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import { Image } from "expo-image";
 import { StatusBar } from "expo-status-bar";
@@ -8,18 +8,25 @@ import { StatusBar } from "expo-status-bar";
 import { mixins } from "@/styles";
 import { LOGO } from "@/constants/images";
 
-import Input from "@/components/inputs/Input";
 import { H2, P } from "@/components/typography";
 import Container from "@/components/misc/Container";
-import Checkbox from "@/components/inputs/Checkbox";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
+import AuthForm from "@/components/forms/AuthForm";
 import ScreenWrapper from "@/components/wrappers/ScreenWrapper";
 
 const CreateAccountScreen = () => {
   const navigation = useNavigation();
+  const [isLoginMode, setIsLoginMode] = useState(false);
 
-  const onSubmit = () => {
+  const handleSubmit = () => {
     navigation.navigate("Tab" as never);
+  };
+
+  const handleSwitchMode = () => {
+    if (isLoginMode) {
+      navigation.navigate("CreateAccount" as never);
+    } else {
+      navigation.navigate("Login" as never);
+    }
   };
 
   return (
@@ -34,46 +41,17 @@ const CreateAccountScreen = () => {
 
           <View style={styles.formContainer}>
             <View style={styles.formTitleContainer}>
-              <H2 style={styles.formTitle}>Create an account </H2>
+              <H2 style={styles.formTitle}>Create an account</H2>
               <P style={styles.formDescription}>
-                Enter your email and password to create an account
+                Enter your details to create an account
               </P>
             </View>
-            <Input
-              label="Name"
-              placeholder="Enter your name"
-              containerStyle={styles.inputContainer}
+
+            <AuthForm
+              mode="register"
+              onSubmit={handleSubmit}
+              onSwitchMode={handleSwitchMode}
             />
-            <Input
-              label="Email Address"
-              placeholder="Enter your email"
-              containerStyle={styles.inputContainer}
-            />
-            <Input
-              label="Password"
-              placeholder="Enter your password"
-              secureTextEntry
-              containerStyle={styles.inputContainer}
-            />
-            <View style={styles.checkboxContainer}>
-              <Checkbox checked={false} onValueChange={() => {}} />
-              <P style={styles.checkboxText}>
-                I agree to the terms and privacy policy
-              </P>
-            </View>
-          </View>
-        </View>
-        <View>
-          <PrimaryButton style={styles.loginButton} onPress={onSubmit}>
-            Create account
-          </PrimaryButton>
-          <View style={styles.signupContainer}>
-            <P style={styles.signupText}>Already have an account? </P>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Login" as never)}
-            >
-              <P style={styles.signupLink}>Login</P>
-            </TouchableOpacity>
           </View>
         </View>
       </Container>
@@ -90,13 +68,6 @@ const styles = StyleSheet.create({
   formTitleContainer: mixins.formTitleContainer,
   formTitle: mixins.screenFormTitle,
   formDescription: mixins.screenFormDescription,
-  inputContainer: mixins.screenInputContainer,
-  checkboxContainer: mixins.checkboxContainer,
-  checkboxText: mixins.checkboxText,
-  loginButton: mixins.primaryButton,
-  signupContainer: mixins.signupContainer,
-  signupText: mixins.signupText,
-  signupLink: mixins.signupLink,
 });
 
 export default CreateAccountScreen;

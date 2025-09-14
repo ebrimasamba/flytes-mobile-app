@@ -6,6 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { PropsWithChildren } from "react";
+import { ActivityIndicator } from "react-native";
 
 // Design system imports
 import { colors, mixins } from "@/styles";
@@ -15,33 +16,56 @@ import { LinearGradient } from "expo-linear-gradient";
 interface PrimaryButtonProps extends TouchableOpacityProps {
   icon?: any;
   style?: TouchableOpacityProps["style"];
-  variant?: "secondary";
+  variant?: "secondary" | "text";
+  loading?: boolean;
 }
 const PrimaryButton = (props: PropsWithChildren<PrimaryButtonProps>) => {
+  const { loading, variant, ...touchableProps } = props;
+
+  const getButtonStyle = () => {
+    if (variant === "secondary") {
+      return {
+        backgroundColor: "transparent",
+        borderWidth: 1,
+        borderColor: colors.primary,
+      };
+    }
+    if (variant === "text") {
+      return {
+        backgroundColor: "transparent",
+        borderWidth: 0,
+      };
+    }
+    return {};
+  };
+
+  const getTextStyle = () => {
+    if (variant === "secondary") {
+      return { color: colors.primary };
+    }
+    if (variant === "text") {
+      return {
+        color: colors.primary,
+        textDecorationLine: "underline" as const,
+      };
+    }
+    return {};
+  };
+
   return (
     <TouchableOpacity
-      {...props}
-      style={[
-        mixins.button,
-        props.variant === "secondary" && {
-          backgroundColor: "transparent",
-          borderWidth: 1,
-          borderColor: colors.primary,
-        },
-        props.style,
-      ]}
+      {...touchableProps}
+      disabled={loading || props.disabled}
+      style={[mixins.button, getButtonStyle(), props.style]}
     >
       <View style={styles.buttonContent}>
-        <H2
-          style={[
-            mixins.buttonText,
-            props.variant === "secondary" && {
-              color: colors.primary,
-            },
-          ]}
-        >
-          {props.children}
-        </H2>
+        {loading ? (
+          <ActivityIndicator
+            color={variant === "text" ? colors.primary : colors.white}
+          />
+        ) : (
+          <H2 style={[mixins.buttonText, getTextStyle()]}>{props.children}</H2>
+        )}
       </View>
     </TouchableOpacity>
   );
