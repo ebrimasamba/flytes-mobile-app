@@ -23,6 +23,33 @@ export const SERVICES = [
 ];
 
 
+export const SUGGESTED_PLACES = [{
+    id: 1,
+    name: "Dakar",
+    type: "City",
+    country: "Senegal",
+}, {
+    id: 2,
+    name: "Bias Diane International Airport",
+    type: "Airport",
+    country: "Senegal",
+}, {
+    id: 3,
+    name: "Tenerife",
+    type: "City",
+    country: "Spain",
+}, {
+    id: 4,
+    name: "London",
+    type: "City",
+    country: "England",
+}, {
+    id: 5,
+    name: "New York",
+    type: "City",
+    country: "United States",
+}]
+
 export const POPULAR_DESTINATIONS = [
     {
         id: 1,

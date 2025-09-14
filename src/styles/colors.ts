@@ -2,6 +2,7 @@ const colors = {
     primary: "#FF0077",
     primaryLight: "#FF3399",
     primaryDark: "#CC0060",
+    secondary: "#008000",
     white: "#FFFFFF",
     text: "#0A0A0A",
     textLight: "#808080",

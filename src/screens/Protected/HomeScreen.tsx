@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { colors, mixins } from "@/styles";
 import Container from "@/components/misc/Container";
 import HomeHeader from "@/components/homescreen/HomeHeader";
-import ServicesSection from "@/components/services-section/ServicesSection";
+
 import PopularDestinations from "@/components/popular-destinations/PopularDestinations";
 
 const HomeScreen = () => {

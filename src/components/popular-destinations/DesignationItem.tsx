@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     overflow: "hidden",
     marginBottom: 20,
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 20,
-    elevation: 8,
+    // shadowColor: colors.black,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 8,
+    // },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 20,
+    // elevation: 8,
   },
   header: {
     height: 140,

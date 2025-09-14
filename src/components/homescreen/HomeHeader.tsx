@@ -10,15 +10,18 @@ import { ImageBackground } from "expo-image";
 import Container from "../misc/Container";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ButtonInput from "../inputs/ButtonInput";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeHeader = () => {
+  const navigation = useNavigation();
   const [activeInput, setActiveInput] = useState<string | null>(null);
   const [tripType, setTripType] = useState<"one-way" | "round-trip">(
     "round-trip"
   );
 
   const handleInputPress = (inputType: string) => {
-    setActiveInput(inputType);
+    // setActiveInput(inputType);
+    navigation.navigate("SearchModal" as never);
   };
 
   const handleTripTypeChange = (type: "one-way" | "round-trip") => {
@@ -189,20 +192,7 @@ const styles = StyleSheet.create({
     opacity: 0.85,
     fontWeight: "600",
   },
-  weatherContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.white + "20",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-    gap: 4,
-  },
-  temperature: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: colors.text,
-  },
+
   title: {
     fontSize: 28,
     letterSpacing: -0.8,
@@ -237,6 +227,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     padding: 24,
     borderRadius: 24,
+    borderWidth: 1,
+    borderColor: colors.gray,
     // shadowColor: colors.black,
     // shadowOffset: {
     //   width: 0,
@@ -345,15 +337,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    // shadowColor: colors.primary,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 4,
-    // },
-    // shadowOpacity: 0.3,
-    // shadowRadius: 8,
-    // elevation: 4,
-    // marginBottom: 20,
   },
   searchButtonText: {
     fontSize: 16,

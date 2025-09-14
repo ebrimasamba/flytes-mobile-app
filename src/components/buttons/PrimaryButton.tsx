@@ -31,14 +31,6 @@ const PrimaryButton = (props: PropsWithChildren<PrimaryButtonProps>) => {
         props.style,
       ]}
     >
-      <LinearGradient
-        colors={
-          props.variant === "secondary"
-            ? ["transparent", "transparent"]
-            : [colors.primary, colors.primaryDark]
-        }
-        style={StyleSheet.absoluteFill}
-      />
       <View style={styles.buttonContent}>
         <H2
           style={[

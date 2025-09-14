@@ -1,48 +1,28 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import colors from "@/styles/colors";
-import { Ionicons } from "@expo/vector-icons";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import ProfileScreen from "./Profile/ProfileScreen";
 import HomeScreen from "@/screens/Protected/HomeScreen";
+import SearchModalScreen from "@/screens/Protected/Modals/SearchModalScreen";
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator
+    <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <Ionicons
-              name="home"
-              color={focused ? colors.primary : color}
-              size={size}
-            />
-          ),
-        }}
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen
+        name="SearchModal"
+        component={SearchModalScreen}
+        options={{ presentation: "modal" }}
       />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarIcon: ({ color, size, focused }) => (
-            <Ionicons
-              name="person"
-              color={focused ? colors.primary : color}
-              size={size}
-            />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+    </Stack.Navigator>
   );
 };
 

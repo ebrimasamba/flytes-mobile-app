@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { H2, P } from "../typography";
+import { H1, H2, P } from "../typography";
 import { colors } from "@/styles";
 import DesignationItem from "./DesignationItem";
 import { POPULAR_DESTINATIONS } from "@/constants";
@@ -9,7 +9,7 @@ const PopularDestinations = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <H2 style={styles.title}>Popular Flights</H2>
+        <H1 style={styles.title}>Popular Flights</H1>
         <P style={styles.description}>
           Discover the most popular flights around the world
         </P>

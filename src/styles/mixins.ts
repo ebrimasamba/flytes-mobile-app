@@ -3,6 +3,10 @@ import typography from "@/styles/typography"
 import { StyleSheet } from "react-native"
 
 const mixins = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        backgroundColor: colors.white,
+    },
     scrollView: {
         flexGrow: 1,
     },
