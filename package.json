@@ -12,6 +12,7 @@
     "@expo-google-fonts/figtree": "^0.4.1",
     "@expo/metro-runtime": "~5.0.4",
     "@react-native-async-storage/async-storage": "^2.2.0",
+    "@react-native-community/datetimepicker": "8.4.1",
     "@react-navigation/bottom-tabs": "^7.4.6",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.17",
@@ -31,6 +32,7 @@
     "expo-splash-screen": "~0.30.7",
     "expo-status-bar": "~2.2.3",
     "expo-system-ui": "~5.0.6",
+    "formik": "^2.4.6",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
@@ -40,6 +42,8 @@
     "react-native-screens": "~4.11.1",
     "react-native-web": "^0.20.0",
     "undefined": "@expo/vector-icons/Ionicons",
+    "zod": "^4.1.8",
+    "zod-formik-adapter": "^2.0.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

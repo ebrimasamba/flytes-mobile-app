@@ -23,7 +23,7 @@ const HomeHeader = () => {
 
   const handleInputPress = (inputType: string) => {
     // setActiveInput(inputType);
-    navigation.navigate("SearchModal" as never);
+    navigation.navigate("FlightSearch" as never);
   };
 
   const handleTripTypeChange = (type: "one-way" | "round-trip") => {

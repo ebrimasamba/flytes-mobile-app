@@ -10,7 +10,7 @@ import { LOGO } from "@/constants/images";
 
 import { H2, P } from "@/components/typography";
 import Container from "@/components/misc/Container";
-import AuthForm from "@/components/forms/AuthForm";
+import EnhancedAuthForm from "@/components/forms/EnhancedAuthForm";
 import ScreenWrapper from "@/components/wrappers/ScreenWrapper";
 
 const LoginScreen = () => {
@@ -51,7 +51,7 @@ const LoginScreen = () => {
               </P>
             </View>
 
-            <AuthForm
+            <EnhancedAuthForm
               mode={isLoginMode ? "login" : "register"}
               onSubmit={handleSubmit}
               onSwitchMode={handleSwitchMode}

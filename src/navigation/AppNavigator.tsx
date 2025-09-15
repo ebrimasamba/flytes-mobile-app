@@ -8,6 +8,10 @@ import TabNavigator from "./TabNavigator";
 import LoginScreen from "@/screens/LoginScreen";
 import LoadingScreen from "@/screens/LoadingScreen";
 import CreateAccountScreen from "@/screens/CreateAccountScreen";
+import SkyscannerFlightSearchScreen from "@/screens/SkyscannerFlightSearchScreen";
+import EnhancedFlightResultsScreen from "@/screens/EnhancedFlightResultsScreen";
+import FlightDetailsScreen from "@/screens/FlightDetailsScreen";
+import EnhancedFlightBookingScreen from "@/screens/EnhancedFlightBookingScreen";
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -25,7 +29,22 @@ const AppNavigator = () => {
       }}
     >
       {isAuthenticated ? (
-        <Stack.Screen name="Tab" component={TabNavigator} />
+        <>
+          <Stack.Screen name="Tab" component={TabNavigator} />
+          <Stack.Screen
+            name="FlightSearch"
+            component={SkyscannerFlightSearchScreen}
+          />
+          <Stack.Screen
+            name="FlightResults"
+            component={EnhancedFlightResultsScreen}
+          />
+          <Stack.Screen name="FlightDetails" component={FlightDetailsScreen} />
+          <Stack.Screen
+            name="FlightBooking"
+            component={EnhancedFlightBookingScreen}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen name="Login" component={LoginScreen} />

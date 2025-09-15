@@ -14,6 +14,7 @@ import {
 } from "react-native";
 
 import { SUGGESTED_PLACES } from "@/constants";
+import { placesService } from "@/services/placesService";
 
 import { H2, P } from "@/components/typography";
 import Input from "@/components/inputs/Input";
@@ -25,49 +26,21 @@ const SearchModalScreen = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [recentSearches, setRecentSearches] = useState([
-    { name: "London", type: "City", country: "United Kingdom", isRecent: true },
-    {
-      name: "Dubai International",
-      type: "Airport",
-      country: "UAE",
-      airportCode: "DXB",
-      isRecent: true,
-    },
-    { name: "Paris", type: "City", country: "France", isRecent: true },
-  ]);
 
-  // Simulate search with debounce
+  // Search with debounce using real API
   useEffect(() => {
     if (searchQuery.length > 0) {
       setIsSearching(true);
-      const timer = setTimeout(() => {
-        // Simulate API search results
-        const mockResults = [
-          {
-            name: "London Heathrow",
-            type: "Airport",
-            country: "United Kingdom",
-            airportCode: "LHR",
-            isPopular: true,
-          },
-          {
-            name: "London",
-            type: "City",
-            country: "United Kingdom",
-            distance: "2.3 km",
-          },
-          {
-            name: "London Gatwick",
-            type: "Airport",
-            country: "United Kingdom",
-            airportCode: "LGW",
-          },
-        ].filter((item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setSearchResults(mockResults);
-        setIsSearching(false);
+      const timer = setTimeout(async () => {
+        try {
+          const results = await placesService.searchPlaces(searchQuery);
+          setSearchResults(results);
+        } catch (error) {
+          console.error("Search error:", error);
+          setSearchResults([]);
+        } finally {
+          setIsSearching(false);
+        }
       }, 500);
 
       return () => clearTimeout(timer);
@@ -91,19 +64,40 @@ const SearchModalScreen = () => {
       ];
     }
 
-    return [
-      {
-        name: "Current Location",
+    const currentLocation = placesService.getCurrentLocation();
+    const recentSearches = placesService.getRecentSearches();
+
+    const sections = [];
+
+    if (currentLocation) {
+      sections.push({
+        name: currentLocation.name,
         type: "location",
-        country: "Gambia",
+        country: currentLocation.country || "Unknown",
         isCurrentLocation: true,
-      },
-      { isHeader: true, title: "Recent Searches", id: "recent-header" },
-      ...recentSearches,
-      { isHeader: true, title: "Popular Destinations", id: "popular-header" },
-      ...SUGGESTED_PLACES.map((place) => ({ ...place, isPopular: true })),
-    ];
-  }, [searchQuery, searchResults, isSearching, recentSearches]);
+      });
+    }
+
+    if (recentSearches.length > 0) {
+      sections.push({
+        isHeader: true,
+        title: "Recent Searches",
+        id: "recent-header",
+      });
+      sections.push(...recentSearches);
+    }
+
+    sections.push({
+      isHeader: true,
+      title: "Popular Destinations",
+      id: "popular-header",
+    });
+    sections.push(
+      ...SUGGESTED_PLACES.map((place) => ({ ...place, isPopular: true }))
+    );
+
+    return sections;
+  }, [searchQuery, searchResults, isSearching]);
 
   const clearSearch = () => {
     setSearchQuery("");
@@ -112,7 +106,8 @@ const SearchModalScreen = () => {
   };
 
   const clearRecentSearches = () => {
-    setRecentSearches([]);
+    // In a real app, this would clear from AsyncStorage
+    // For now, we don't have recent searches since we removed mock data
   };
 
   const renderItem = useCallback(
@@ -146,14 +141,15 @@ const SearchModalScreen = () => {
         return (
           <View style={styles.headerRow}>
             <H2 style={styles.listHeaderTitle}>{item.title}</H2>
-            {item.id === "recent-header" && recentSearches.length > 0 && (
-              <TouchableOpacity
-                onPress={clearRecentSearches}
-                style={styles.clearButton}
-              >
-                <Text style={styles.clearButtonText}>Clear</Text>
-              </TouchableOpacity>
-            )}
+            {item.id === "recent-header" &&
+              placesService.getRecentSearches().length > 0 && (
+                <TouchableOpacity
+                  onPress={clearRecentSearches}
+                  style={styles.clearButton}
+                >
+                  <Text style={styles.clearButtonText}>Clear</Text>
+                </TouchableOpacity>
+              )}
           </View>
         );
       }
@@ -174,7 +170,7 @@ const SearchModalScreen = () => {
         />
       );
     },
-    [recentSearches.length, navigation]
+    [navigation]
   );
 
   const renderSearchSuggestions = () => {
@@ -230,24 +226,6 @@ const SearchModalScreen = () => {
               placeholder="Search for a city or airport"
               value={searchQuery}
               onChangeText={setSearchQuery}
-              leftIcon={
-                <MaterialIcons
-                  name="search"
-                  size={20}
-                  color={colors.textLight}
-                />
-              }
-              rightIcon={
-                searchQuery.length > 0 ? (
-                  <TouchableOpacity onPress={clearSearch}>
-                    <MaterialIcons
-                      name="close"
-                      size={20}
-                      color={colors.textLight}
-                    />
-                  </TouchableOpacity>
-                ) : undefined
-              }
               containerStyle={styles.searchInput}
             />
           </View>
@@ -398,7 +376,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    backgroundColor: colors.backgroundLight,
+    backgroundColor: colors.background,
   },
   listContent: {
     paddingVertical: 16,

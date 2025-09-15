@@ -14,7 +14,11 @@ const colors = {
     backgroundInput: "#F5F5F5",
     success: "#008000",
     warning: "#FFA500",
-
+    background: "#FFFFFF",
+    surface: "#F8F9FA",
+    border: "#E5E5E5",
+    error: "#DC3545",
+    errorLight: "#F8D7DA",
 };
 
 export default colors;
