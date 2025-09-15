@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Alert, Animated } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  Animated,
+  TouchableOpacity,
+} from "react-native";
 import { Formik } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 
@@ -16,6 +22,7 @@ import PrimaryButton from "@/components/buttons/PrimaryButton";
 import LoadingSpinner from "@/components/misc/LoadingSpinner";
 import FormikInput from "./FormikInput";
 import FormikCheckbox from "./FormikCheckbox";
+import { colors } from "@/styles";
 
 interface EnhancedAuthFormProps {
   mode: "login" | "register";
@@ -55,10 +62,6 @@ const EnhancedAuthForm: React.FC<EnhancedAuthFormProps> = ({
 
   const handleSubmit = async (values: LoginFormData | RegisterFormData) => {
     // Validate terms agreement
-    if (!agreedToTerms) {
-      Alert.alert("Error", "Please agree to the terms and privacy policy");
-      return;
-    }
 
     try {
       if (isLogin) {
@@ -176,13 +179,14 @@ const EnhancedAuthForm: React.FC<EnhancedAuthFormProps> = ({
                     ? "Don't have an account? "
                     : "Already have an account? "}
                 </P>
-                <PrimaryButton
-                  variant="text"
+                <TouchableOpacity
                   onPress={onSwitchMode}
                   style={styles.switchButton}
                 >
-                  {isLogin ? "Sign up" : "Login"}
-                </PrimaryButton>
+                  <P style={styles.switchButtonText}>
+                    {isLogin ? "Sign up" : "Login"}
+                  </P>
+                </TouchableOpacity>
               </View>
             </View>
           </>
@@ -242,6 +246,9 @@ const styles = StyleSheet.create({
   },
   switchButton: {
     marginLeft: 4,
+  },
+  switchButtonText: {
+    color: colors.primary,
   },
   loadingContainer: {
     flexDirection: "row",

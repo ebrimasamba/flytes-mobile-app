@@ -5,7 +5,6 @@ import { colors, mixins } from "@/styles";
 import Container from "@/components/misc/Container";
 import HomeHeader from "@/components/homescreen/HomeHeader";
 import PopularDestinations from "@/components/popular-destinations/PopularDestinations";
-import ServicesSection from "@/components/services-section/ServicesSection";
 
 const HomeScreen = () => {
   return (
@@ -17,7 +16,6 @@ const HomeScreen = () => {
       <HomeHeader />
       <Container style={styles.container}>
         <View style={styles.contentContainer}>
-          <ServicesSection />
           <PopularDestinations />
         </View>
       </Container>
